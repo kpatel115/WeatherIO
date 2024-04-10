@@ -5,8 +5,28 @@
 *{
   color: black;
 }
+h1{
+  color: white;
+}
+form label{
+  color: white;
+  font-size: larger;
+}
+form input{
+  color: white;
+  background-color: slategrey;
+  border-radius: 12px;
+  padding: 0.5rem;
+  font-size: large;
+}
+form button{
+  margin-left: 1rem;
+  background-color: slategrey;
+  color: white;
+}
 #title{
-  background-color: antiquewhite;
+  background-color: black;
+  opacity: .7;
   border-radius: 12px;
   margin: 5px;
   padding: 10px;
@@ -27,7 +47,8 @@
   flex-direction: column;
 }
 #form{
-  background-color: antiquewhite;
+  opacity: .7;
+  background-color: black;
   border-radius: 12px;
   margin: 5px;
   padding: 10px;

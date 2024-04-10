@@ -12,6 +12,7 @@ const DataCard = ({ weatherData }) => {
   
   let temp = weatherData.main.temp 
   let convertedTemp = (temp - 273.15) * 9/5 + 32
+
   return (
 
     <Card>
@@ -25,7 +26,9 @@ const DataCard = ({ weatherData }) => {
         </Typography>
         <Typography variant="body3" color="text.secondary">
           <img src={`http://openweathermap.org/img/w/${weatherData.weather[0].icon}.png`} />
+          <br/>
           Skies: {weatherData.weather[0].description}
+          <br/>
           Humidity: {weatherData.main.humidity}
         </Typography>
       </CardContent>

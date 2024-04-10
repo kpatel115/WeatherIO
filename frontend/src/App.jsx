@@ -8,66 +8,36 @@ import './App.css'
 import React, { useState, useEffect } from 'react';
 import axios from 'axios'; // Ensure axios is imported if you're using it
 import DataCard from './components/DataCard';
+import { BrowserRouter as Router } from 'react-router-dom';
+import Routes from './routes/routes';
+
+
 const App = () => {
 
-  const [city, setCity] = useState('');
-  const [weatherData, setWeatherData] = useState(null);
+  ////////////////////////////////////////////////////////////////////////////////////////
+  // This code was not necessary and created problems for the app
+  // every time the user entered a letter in the input it would fetch from the api
 
+  // // Effect to trigger the fetch when city changes
+  // useEffect(() => {
+  //   if (city) {
+  //     fetchWeatherData();
+  //   }
+  // }, [city]);
 
+  // const handleFormChange = (event) => {
+  //   setCity(event.target.value);
+  // };
+  /////////////////////////////////////////////////////////////////////
 
-  const [backgroundURL, setBackgroundUrl] = useState('https://source.unsplash.com/1600x900/?Chicago')
-  // Function to fetch weather data
-  const fetchWeatherData = async () => {
-    if (!city) return;
-
-    const apiKey = import.meta.env.VITE_WEATHER_API_KEY; // Replace with your actual API key
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
-
-    try {
-      const response = await axios.get(url);
-      setWeatherData(response.data); // Store weather data in state
-      console.log(response.data); // Log the weather data to the console
-    } catch (error) {
-      console.error('Error fetching weather data:', error);
-    }
-  };
-
-  // Effect to trigger the fetch when city changes
-  useEffect(() => {
-    if (city) {
-      fetchWeatherData();
-    }
-  }, [city]);
-
-  const handleFormChange = (event) => {
-    setCity(event.target.value);
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    fetchWeatherData();
-  };
 
   return (
-    <div id='container' className='w-4/5 h-4/5' style={{ backgroundImage: `url(${backgroundURL})` }}>
-      <div id='wrapper'>
-        <div id='title'>
-          <h1>Weather IO</h1>
-        </div>
-        <form id='form' onSubmit={handleSubmit}>
-          <label>Enter a City</label>
-          <input
-            type="text"
-            name="city"
-            value={city}
-            onChange={handleFormChange}
-          />
-          <button type="submit">Submit</button>
-        </form>
-
-        {weatherData && <DataCard weatherData={weatherData} />}
+    <Router>
+      <div>
+        <h1>Weather IO</h1>
+        <Routes/>
       </div>
-    </div>
+    </Router>
   );
 };
 
