@@ -1,21 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import { Navigate, Link } from 'react-router-dom';
-import { doSignInWithEmailAndPassword, doSignInWithGoogle } from '../context/authContext/auth';
+import { Navigate, Link, useNavigate } from 'react-router-dom';
+import { doCreateUserWithEmailAndPassword, doSignInWithGoogle } from '../context/authContext/auth';
 import { useAuth } from '../context/authContext';
 // User will login
 
-const Login = () => {
+const Register = () => {
 
-    const { userLoggedIn } = authAuth()
+    const navigate = useNavigate();
+
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [isSigningIn, setIsSigningIn] = useState(false);
+    const [confirmPassword, setConfirmPassword] = useState('')
+    const [isRegistering, setIsRegistering] = useState(false);
     const [errorMessage, setErrorMessage] = useState('')
 
     const onSubmit = async (e) => {
         e.preventDefault();
-        if (!isSigningIn) {
-            setIsSigningIn(true)
+        if (!isRegistering) {
+            setIsRegistering(true)
             await doSignInWithEmailAndPassword(email, password)
         }
     }
@@ -59,6 +61,8 @@ const Login = () => {
     );
 };
 
+};
 
 
-export default Login
+
+export default Register

@@ -12,3 +12,31 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+
+
+// User model
+model User {
+  id           Int          @id @default(autoincrement())
+  username     String       @unique
+  password     String
+  locations    Location[]   // Relation to Location: One User has many Locations
+}
+
+// Location model
+model Location {
+  id          Int          @id @default(autoincrement())
+  city        String
+  userId      Int          // Foreign key for User
+  user        User         @relation(fields: [userId], references: [id])
+  weatherLogs WeatherLog[] // Relation to WeatherLog: One Location has many Weather Logs
+}
+
+// WeatherLog model
+model WeatherLog {
+  id         Int      @id @default(autoincrement())
+  details    Json     // Storing weather data as JSON
+  loggedAt   DateTime @default(now())
+  locationId Int      // Foreign key for Location
+  location   Location @relation(fields: [locationId], references: [id])
+}

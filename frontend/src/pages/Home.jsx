@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { useAuth } from '../context/authContext';
 // User will login
 
 const Home = () => {
+    const { currentUser } = useAuth()
 
     const [city, setCity] = useState('');
     const [weatherData, setWeatherData] = useState(null);
@@ -33,7 +35,7 @@ const Home = () => {
 
     return (
         <div id='container' className='w-4/5 h-4/5' style={{ backgroundImage: `url(${backgroundURL})` }}>
-
+            Welcome {currentUser.displayname ? currentUser.displayName : currentUser.email}, you are logged in and ready to use WeatherIO!
             <div id='wrapper'>
                 <div id='title'>
                     <h1>Weather IO</h1>

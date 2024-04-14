@@ -1,20 +1,31 @@
-import React from 'react'
-import "./Nav.css"
+import React from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import { doSignOut } from '../context/authContext/auth';
+import { useAuth } from '../context/authContext';
 
 
 const Nav = () => {
- 
+
+  const navigate = useNavigate()
+  const { userLoggedIn } = useAuth()
+
   return (
-    <div className='nav'>
-        <h1>Car Collection</h1>
-        <ul>
-           <li><a href='#'>Home</a></li> 
-           <li><a href='#'>Add a Car</a></li> 
-           
-           <li><a href='#'>Login</a></li> 
-           <li><a href='#'>Signup</a></li> 
-        </ul>
-    </div>
+    <>
+      <nav>
+        {
+          userLoggedIn
+          ?
+          <div>
+            <button onClick={() => { doSignOut().then(() => { navigate('/login') }) }}></button>
+          </div>
+          :
+        <div>
+          <Link to={'/login'}>Login</Link>
+          <Link to={'/register'}>Register</Link>
+          </div>
+        }
+      </nav>
+    </>
   )
 }
 
